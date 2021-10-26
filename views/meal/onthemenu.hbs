@@ -1,0 +1,22 @@
+<!---
+/************************************************************************************
+ *  WEB322 – Project (Fall 2021)
+ *  I declare that this assignment is my own work in accordance with Seneca Academic
+ *  Policy. No part of this assignment has been copied manually or electronically from
+ *  any other source (including web sites) or distributed to other students.
+ * Name: Victor Lozano Alonso
+ * Student ID: 130720204
+ * Course/Section: WEB322 ZAA
+ ************************************************************************************/
+ --->
+{{>hero}}
+{{#each meals}}
+<section class="meals-kit">
+    <h2>{{category}}</h2>
+    <div class="container py-3">
+        <div class="row row-cols-1 row-cols-md-2">
+            {{>mealKits this}}
+        </div>
+    </div>
+</section>
+{{/each}}

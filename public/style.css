@@ -1,0 +1,225 @@
+/************************************************************************************
+ *  WEB322 – Project (Fall 2021)
+ *  I declare that this assignment is my own work in accordance with Seneca Academic
+ *  Policy. No part of this assignment has been copied manually or electronically from
+ *  any other source (including web sites) or distributed to other students.
+ * Name: Victor Lozano Alonso
+ * Student ID: 130720204
+ * Course/Section: WEB322 ZAA
+ ************************************************************************************/
+
+/* CSS HEX Created by coolors.co */
+:root{
+    --prussian-blue: #003049ff;
+    --maximum-red: #d62828ff;
+    --orange: #f77f00ff;
+    --maximum-yellow-red: #fcbf49ff;
+    --lemon-meringue: #eae2b7ff;
+}
+body{
+    font-family: 'Montserrat', sans-serif;
+    margin: 0 30px;
+    box-shadow: 0px 0px 3px 0px #d3d0d0;
+}
+header{
+    display: flex;
+    flex-direction: row;
+    background-color: var(--maximum-red);
+}
+h2{
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+}
+/* Header */
+.logo{
+    max-width: 25%;
+    align-self: center;
+    padding: 5px 0;
+}
+.logo img{
+    padding: 0 20px;
+}
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 0 20px;
+}
+.menu-items{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+    align-items: center;
+    color: #ffffff;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+.menu-items li a{
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 15px;
+}
+.menu-items li a:hover, .sign-up a:hover{
+    background-color: var(--lemon-meringue);
+    color: var(--prussian-blue);
+    border-radius: 3px;
+}
+.sign-up a{
+    text-decoration: none;
+    color: var(--lemon-meringue);
+    font-weight: bold;
+    padding: 10px 15px;
+    margin-left: 20px;
+    margin-right: 10px;
+}
+.login a{
+    text-decoration: none;
+    color: var(--lemon-meringue);
+    font-weight: bold;
+    background-color: var(--prussian-blue);
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+.login a:hover{
+    background-color: var(--lemon-meringue);
+    color: var(--prussian-blue);
+}
+/* Home Content */
+.hero img{
+    width: 100%;
+}
+.featured-info{
+    padding: 20px 0;
+}
+.top-meals{
+    background-color: var(--lemon-meringue);
+    padding: 15px;
+}
+/* On the menu */
+.price{
+    float: right;
+    border: 1px solid #1e1e1e;
+    padding: 5px 10px;
+    margin-top: 15px;
+}
+.meals-kit{
+    padding: 30px 0px;
+}
+/*Sign Up */
+.signup-form, .login-form{
+    display: flex;
+    flex-direction: column;
+    color: #ffffff;
+    max-width: 60%;
+    background-color:  var(--maximum-red);
+    text-align: center;
+    padding-top: 10px;
+    margin: 30px auto;
+}
+input, input :focus-visible{
+    border: 1px solid var(--maximum-red) !important;
+    height: 60px;
+}
+.btn{
+    background-color: var(--prussian-blue);
+    font-weight: bold;
+    color: #ffffff;
+}
+.btn:hover{
+    color: var(--lemon-meringue);
+}
+/* Footer */
+footer{
+    background-color: var(--prussian-blue);
+}
+.footer-menu ul{
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    justify-content: space-around;
+    padding: 20px 40px;
+    margin: 0;
+}
+.footer-menu ul li {
+    padding: 5px 0;
+}
+.footer-menu ul li a{
+    color: #ffffff;
+    text-decoration: none;
+}
+.footer-menu ul li a:hover{
+    text-decoration: underline;
+}
+.info, .info a{
+    color: #ffffff;
+}
+.info a:hover{
+    color: var(--lemon-meringue);
+}
+.info ul{
+    list-style: none;
+}
+.info ul li{
+    padding: 10px 0;
+}
+.info ul.social-media{
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+}
+.info ul.social-media li{
+    padding: 10px;
+}
+.info ul.social-media li a i{
+    font-size: 2rem;
+}
+.copyright{
+    font-style: italic;
+    color: #ffffff;
+    grid-row-start: 2; 
+    grid-row-end: 2; 
+    grid-column-start: 1;
+    grid-column-end: 3;
+    padding: 10px;
+}
+/* Responsive */
+@media screen and (max-width: 767px) {
+    .logo{
+        max-width: 40%;
+    }
+    .menu-items{
+        flex-direction: column;
+        align-items: flex-end;
+        padding: 5px 0;
+    }
+    .menu-items li{
+        display: flex;
+        margin-top: 5px;
+    }
+    .menu-items li a{
+        padding: 5px;
+    }
+    .sign-up, .login{
+        padding: 0;
+        display: flex;
+        justify-content: flex-end;
+    }
+    .login{
+        margin-right: 3px;
+    }
+    .sign-up a{
+        padding: 5px 10px;
+        margin: 5px 0;
+    }
+    .login a{
+        padding: 5px 15px;
+    }
+    .signup-form, .login-form{
+        max-width: 80%;
+    }
+}

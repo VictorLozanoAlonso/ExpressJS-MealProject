@@ -1,0 +1,30 @@
+<!---
+/************************************************************************************
+ *  WEB322 – Project (Fall 2021)
+ *  I declare that this assignment is my own work in accordance with Seneca Academic
+ *  Policy. No part of this assignment has been copied manually or electronically from
+ *  any other source (including web sites) or distributed to other students.
+ * Name: Victor Lozano Alonso
+ * Student ID: 130720204
+ * Course/Section: WEB322 ZAA
+ ************************************************************************************/
+ --->
+<section class="top-meals">
+    <h2 class="py-3">Top Meals</h2>
+    <div class="container mw-100">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+            {{#each topMeals}}
+            <div class="col mb-3">
+                <div class="card">
+                        <img src="{{imgUrl}}" class="card-img-top" alt="{{mealName}}">
+                        <div class="card-body">
+                            <h3 class="card-title">{{mealName}}</h3>
+                            <p class="card-text">{{ingredients}}</p>
+                            <div class="price">{{price}}</div>
+                        </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</section>
