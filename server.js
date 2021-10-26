@@ -7,9 +7,10 @@
  * Student ID: 130720204
  * Course/Section: WEB322 ZAA
  ************************************************************************************/
-var express = require ('express');
+const express = require ('express');
 const exphbs = require ('express-handlebars');
-var app = express ();
+const bodyParser = require('body-parser');
+const app = express ();
 
 app.engine (
   '.hbs',
@@ -22,6 +23,9 @@ app.engine (
 app.set ('view engine', '.hbs');
 
 app.use (express.static (__dirname + '/public'));
+
+// Set up body parser
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // Load controllers into Express
 const generalController = require("./controllers/general");
