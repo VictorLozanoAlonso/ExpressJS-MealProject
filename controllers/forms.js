@@ -8,16 +8,18 @@
  * Course/Section: WEB322 ZAA
  ************************************************************************************/
 
-const mealsModel = require("../models/mealList.js");
-const express = require('express');
-const router = express.Router();
-
-//Routes
-router.get("/", function(req, res) {
-    res.render("general/home", {
-        topMeals: mealsModel.getTopMeals(),
-        title: "Home"
-    });
-});
-
-module.exports = router;
+ const express = require('express');
+ const router = express.Router();
+ 
+ //Routes 
+ router.get("/sign-up", function(req, res) {
+     res.render("forms/signup", {
+         title: "Sign Up"
+     });
+ });
+ router.get("/login", function(req, res) {
+     res.render("forms/login", {
+         title: "Login"
+     });
+ });
+ module.exports = router;

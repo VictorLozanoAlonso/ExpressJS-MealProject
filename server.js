@@ -30,9 +30,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Load controllers into Express
 const generalController = require("./controllers/general");
 const mealController = require("./controllers/meal");
+const formController = require("./controllers/forms");
 
 app.use("/", generalController);
 app.use("/", mealController);
+app.use("/", formController);
 
 // *** THE FOLLOWING CODE SHOULD APPEAR IN YOUR ASSIGNMENT AS IS (WITHOUT MODIFICATION) ***
 
