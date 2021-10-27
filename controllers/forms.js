@@ -97,4 +97,19 @@
          title: "Login"
      });
  });
+ router.post("/login", function(req, res) {
+    const { email, password } = req.body;
+    let validation = {};
+    if (email === null || email.length === 0){
+        validation.email = "*Email cannot be null or empty";
+    }
+    if (password === null || password.length === 0){
+        validation.password = "*Password cannot be null or empty";
+    }
+    res.render("forms/login", {
+        title: "Login",
+        values: req.body,
+        validation
+    });
+ });
  module.exports = router;
