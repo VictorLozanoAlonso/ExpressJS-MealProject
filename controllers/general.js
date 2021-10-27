@@ -9,6 +9,7 @@
  ************************************************************************************/
 
 const mealsModel = require("../models/mealList.js");
+const userInfo = require("../controllers/forms.js");
 const express = require('express');
 const router = express.Router();
 
@@ -22,6 +23,7 @@ router.get("/", function(req, res) {
 router.get("/welcome", function(req, res) {
     res.render("general/welcome", {
         topMeals: mealsModel.getTopMeals(),
+        fullName: userInfo.fullName(),
         title: "Welcome Page"
     });
 });

@@ -30,11 +30,19 @@
         passed = false;
         validation.lName = "*Last Name cannot be null or empty";
     }
-    if (email.search(regexEmail) === -1){
+    if (email === null || email.length === 0){
+        passed = false;
+        validation.email = "*Email cannot be null or empty";
+    }
+    else if (email.search(regexEmail) === -1){
         passed = false;
         validation.email = "*Format is incorrect. You should use something like email@email.com"
     }
-    if (password.search(/\d/) === -1 || password.search(/\W/) === -1 || password.search(/[a-z]/) === -1 || password.search(/[A-Z]/) === -1 || password.length < 6 || password.length > 12){
+    if (password === null || password.length === 0){
+        passed = false;
+        validation.password = "*Password cannot be null or empty";
+    }
+    else if (password.search(/\d/) === -1 || password.search(/\W/) === -1 || password.search(/[a-z]/) === -1 || password.search(/[A-Z]/) === -1 || password.length < 6 || password.length > 12){
         passed = false;
         validation.password = "*Password must have 6 to 12 characters and contains at least one lowercase letter, uppercase letter, number and symbol"
     }
@@ -57,9 +65,14 @@
                 Let me present. I am your chef Victor Lozano. I will be delighted to help you with your future meal kits.<br> 
                 </p>`
         };
+
         sgMail.send(msg)
             .then(() => {
                 res.redirect("welcome");
+                var fullName = "";
+                module.exports.fullName = function() {
+                    return fullName = fName + " " + lName;
+                };
             })
             .catch(err => {
                 console.log(`Error ${err}`);
