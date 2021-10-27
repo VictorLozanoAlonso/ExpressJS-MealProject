@@ -9,15 +9,27 @@
  * Course/Section: WEB322 ZAA
  ************************************************************************************/
  --->
-<form action="/sign-up" method="GET">
+<form action="/sign-up" method="POST">
     <div class="row mb-3">
         <div class="col">
-            <input class="form-control mt-3" type="text" name="fname" id="fname" placeholder="First Name" tabindex="1">
-            <input class="form-control mt-3" type="text" name="lname" id="lname" placeholder="Last Name" tabindex="2">
-            <input class="form-control mt-3" type="email" name="email" id="email" placeholder="Email Address"
+            <input class="form-control mt-3" type="text" name="fName" id="fname" placeholder="First Name" value="{{values.fName}}" tabindex="1">
+            {{#if validation.fName}}
+                <p class="text-light fst-italic text-start"><small>{{validation.fName}}</small></p>
+            {{/if}}
+            <input class="form-control mt-3" type="text" name="lName" id="lname" placeholder="Last Name" value="{{values.lName}}" tabindex="2">
+            {{#if validation.lName}}
+                <p class="text-light fst-italic text-start"><small>{{validation.lName}}</small></p>
+            {{/if}}
+            <input class="form-control mt-3" type="text" name="email" id="email" placeholder="Email Address" value="{{values.email}}"
                 tabindex="3">
-            <input class="form-control mt-3" type="password" name="password" id="password" placeholder="Password"
+            {{#if validation.email}}
+                <p class="text-light fst-italic text-start"><small>{{validation.email}}</small></p>
+            {{/if}}
+            <input class="form-control mt-3" type="password" name="password" id="password" placeholder="Password" value="{{values.password}}"
                 tabindex="4">
+            {{#if validation.password}}
+                <p class="text-light fst-italic text-start"><small>{{validation.password}}</small></p>
+            {{/if}}
             <div class="d-grid gap-2">
                 <input class="btn mt-3" type="submit" value="Sign Up Today" name="submit" id="submit" tabindex="5">
             </div>
