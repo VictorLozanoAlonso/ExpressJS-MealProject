@@ -1,3 +1,4 @@
+<!---
 /************************************************************************************
  *  WEB322 – Project (Fall 2021)
  *  I declare that this assignment is my own work in accordance with Seneca Academic
@@ -7,22 +8,13 @@
  * Student ID: 130720204
  * Course/Section: WEB322 ZAA
  ************************************************************************************/
+ --->
 
-const mealsModel = require("../models/mealList.js");
-const express = require('express');
-const router = express.Router();
-
-//Routes
-router.get("/", function(req, res) {
-    res.render("general/home", {
-        topMeals: mealsModel.getTopMeals(),
-        title: "Home"
-    });
-});
-router.get("/welcome", function(req, res) {
-    res.render("general/welcome", {
-        topMeals: mealsModel.getTopMeals(),
-        title: "Welcome Page"
-    });
-});
-module.exports = router;
+<h1 class="text-center">Welcome to fastRecipe</h1>
+<section class="container">
+    <p>In fastRecipe care every detail. We elaborate our meal kits combininig a balance nutrients and vitamins.</p>
+    <p>Also, we will give you all you need to cook delicious recipes in easy way.</p>
+    <p>Order your first kit, we will do the rest.</p>
+    <p>Let start with our:</p>
+{{>topmeals}}
+</section>

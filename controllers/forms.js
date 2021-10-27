@@ -7,7 +7,7 @@
  * Student ID: 130720204
  * Course/Section: WEB322 ZAA
  ************************************************************************************/
-
+ const mealsModel = require("../models/mealList.js");
  const express = require('express');
  const router = express.Router();
  
@@ -38,7 +38,40 @@
         passed = false;
         validation.password = "*Password must have 6 to 12 characters and contains at least one lowercase letter, uppercase letter, number and symbol"
     }
-    if(!passed){
+    if(passed){
+        const sgMail = require("@sendgrid/mail");
+        sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
+
+        const msg = {
+            to: email,
+            from: 'vlozano-alonso@myseneca.ca',
+            subject: `Welcome ${fName}!`,
+            html:
+                `<h1>Hi ${fName}!</h1>
+                <h2>Welcome to fastRecipe!</h2>
+                <p>Your registered information is:<br>
+                <ul>
+                    <li>Full name: <strong>${fName} ${lName}</strong></li>
+                    <li>Email: <strong>${email}</strong></li>
+                </ul>
+                Let me present. I am your chef Victor Lozano. I will be delighted to help you with your future meal kits.<br> 
+                </p>`
+        };
+        sgMail.send(msg)
+            .then(() => {
+                res.redirect("welcome");
+            })
+            .catch(err => {
+                console.log(`Error ${err}`);
+
+                res.render("forms/signup", {
+                    title: "Sign Up",
+                    values: req.body,
+                    validation
+                });
+            });
+    }
+    else{
         res.render("forms/signup", {
             title: "Sign Up",
             values: req.body,
