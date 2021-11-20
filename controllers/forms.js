@@ -8,6 +8,7 @@
  * Course/Section: WEB322 ZAA
  ************************************************************************************/
  const mealsModel = require("../models/mealList.js");
+ const userModel = require("../models/user.js");
  const express = require('express');
  const router = express.Router();
  
@@ -47,26 +48,36 @@
         validation.password = "*Password must have 6 to 12 characters and contains at least one lowercase letter, uppercase letter, number and symbol"
     }
     if(passed){
-        const sgMail = require("@sendgrid/mail");
-        sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
-
-        const msg = {
-            to: email,
-            from: 'vlozano-alonso@myseneca.ca',
-            subject: `Welcome ${fName}!`,
-            html:
+        const user = new userModel({
+            fName: req.body.fName,
+            lName: req.body.lName,
+            email: req.body.email,
+            password: req.body.password
+        });
+        user.save()
+        .then((userSaved) => {
+            // User was saved correctly.
+            console.log(`User ${userSaved.fName} ${userSaved.lName} has been added to the database.`);
+            const sgMail = require("@sendgrid/mail");
+            sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
+            
+            const msg = {
+                to: email,
+                from: 'vlozano-alonso@myseneca.ca',
+                subject: `Welcome ${fName}!`,
+                html:
                 `<h1>Hi ${fName}!</h1>
                 <h2>Welcome to fastRecipe!</h2>
                 <p>Your registered information is:<br>
                 <ul>
-                    <li>Full name: <strong>${fName} ${lName}</strong></li>
-                    <li>Email: <strong>${email}</strong></li>
+                <li>Full name: <strong>${fName} ${lName}</strong></li>
+                <li>Email: <strong>${email}</strong></li>
                 </ul>
                 Let me present. I am your chef Victor Lozano. I will be delighted to help you with your future meal kits.<br> 
                 </p>`
-        };
-
-        sgMail.send(msg)
+            };
+            
+            sgMail.send(msg)
             .then(() => {
                 res.redirect("welcome");
                 var fullName = "";
@@ -76,13 +87,25 @@
             })
             .catch(err => {
                 console.log(`Error ${err}`);
-
+                
                 res.render("forms/signup", {
                     title: "Sign Up",
                     values: req.body,
                     validation
                 });
             });
+        })
+        .catch((err) => {
+            console.log(`Error adding user to the database ... ${err}`);
+            if (err.code === 11000){
+                validation.email = "*email user is already exist."
+            }
+            res.render("forms/signup", {
+                title: "Sign Up",
+                values: req.body,
+                validation
+            });
+        });
     }
     else{
         res.render("forms/signup", {
