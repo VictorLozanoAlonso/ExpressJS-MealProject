@@ -10,15 +10,19 @@
 const express = require ('express');
 const exphbs = require ('express-handlebars');
 const bodyParser = require('body-parser');
-
 const dotenv = require('dotenv');
+const mongoose = require ("mongoose");
+
+//Set up dotenv environment variables
 dotenv.config({path:"./config/keys.env"});
 
+// Set up Express
 const app = express ();
 
+// Set up Handlebars
 app.engine (
   '.hbs',
-  exphbs ({
+  exphbs({
     extname: '.hbs',
     defaultLayout: 'main',
   })
@@ -26,10 +30,23 @@ app.engine (
 
 app.set ('view engine', '.hbs');
 
+// Set up static folder
 app.use (express.static (__dirname + '/public'));
 
 // Set up body parser
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// Connect to MongoDB
+mongoose.connect(process.env.MONGODB_CONNECTION, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => {
+  console.log("Connected to the MongoDB database.");
+})
+.catch((err) => {
+  console.log(`There was a problem connecting to MongoDB ... ${err}`);
+});
 
 // Load controllers into Express
 const generalController = require("./controllers/general");
