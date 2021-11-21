@@ -17,8 +17,12 @@
                     <ul>
                         <li><a href="/">Home</a></li>
                         <li><a href="/on-the-menu">On the menu</a></li>
+                        {{#if user}}
+                        <li><a href="/logout">Logout</a></li>
+                        {{else}}
                         <li><a href="/sign-up">Sign-up</a></li>
                         <li><a href="/login">Login</a></li>
+                        {{/if}}
                     </ul>
                 </div>
             </div>

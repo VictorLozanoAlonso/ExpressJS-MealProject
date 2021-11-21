@@ -46,7 +46,7 @@ h2{
     align-items: center;
     justify-content: flex-end;
     width: 100%;
-    padding: 0 20px;
+    padding: 0;
 }
 .menu-items{
     list-style: none;
@@ -77,7 +77,10 @@ h2{
     margin-left: 20px;
     margin-right: 10px;
 }
-.login a{
+.logout {
+    font-size: 0.8rem;
+}
+.login a, .logout a{
     text-decoration: none;
     color: var(--lemon-meringue);
     font-weight: bold;
@@ -85,9 +88,23 @@ h2{
     padding: 10px 20px;
     border-radius: 20px;
 }
-.login a:hover{
+.login a:hover, .logout a:hover{
     background-color: var(--lemon-meringue);
     color: var(--prussian-blue);
+}
+.user{
+    color: #fff;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 0.9rem;
+    text-decoration: none;
+    padding: 0 25px;
+}
+.user a{
+    color: #ffffff;
+}
+.user a:hover{
+    text-decoration: underline;
 }
 /* Home Content */
 .hero img{
@@ -125,12 +142,12 @@ input, input :focus-visible{
     border: 1px solid var(--maximum-red) !important;
     height: 60px;
 }
-.btn{
+.col .btn{
     background-color: var(--prussian-blue);
     font-weight: bold;
     color: #ffffff;
 }
-.btn:hover{
+.col .btn:hover{
     color: var(--lemon-meringue);
 }
 /* Footer */
@@ -204,22 +221,26 @@ footer{
     .menu-items li a{
         padding: 5px;
     }
-    .sign-up, .login{
+    .sign-up, .login, .logout{
         padding: 0;
         display: flex;
         justify-content: flex-end;
     }
-    .login{
+    .login, .logout{
         margin-right: 3px;
     }
     .sign-up a{
         padding: 5px 10px;
         margin: 5px 0;
     }
-    .login a{
+    .login a, .logout a{
         padding: 5px 15px;
     }
     .signup-form, .login-form{
         max-width: 80%;
+    }
+    .user {
+        text-align: right;
+        padding: 15px 0;
     }
 }

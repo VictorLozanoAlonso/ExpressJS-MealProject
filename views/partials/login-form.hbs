@@ -22,6 +22,18 @@
             {{#if validation.password}}
                 <p class="text-light fst-italic text-start"><small>{{validation.password}}</small></p>
             {{/if}}
+            <div class="form-check mt-3 text-start">
+                <input class="form-check-input" type="radio" name="loginType" id="Clerk" value="Clerk">
+                <label class="form-check-label" for="Clerk">
+                    Data Entry Clerk
+                </label>
+            </div>
+            <div class="form-check text-start">
+                <input class="form-check-input" type="radio" name="loginType" id="Customer" value="Customer" checked>
+                <label class="form-check-label" for="Customer">
+                    Customer
+                </label>
+            </div>
             <div class="d-grid gap-2">
                 <input class="btn mt-3" type="submit" value="Log in" name="submit" id="submit" tabindex="3">
             </div>

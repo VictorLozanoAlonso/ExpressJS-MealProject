@@ -9,6 +9,7 @@
  ************************************************************************************/
 const express = require ('express');
 const exphbs = require ('express-handlebars');
+const session = require ('express-session');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const mongoose = require ("mongoose");
@@ -29,6 +30,20 @@ app.engine (
 );
 
 app.set ('view engine', '.hbs');
+
+// Set up express-session
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true
+}));
+
+app.use((req, res, next) => {
+  // res.locals.user is a global handlebars variable.
+  // This means that every single handlebars file can access this variable.
+  res.locals.user = req.session.user;
+  next();
+});
 
 // Set up static folder
 app.use (express.static (__dirname + '/public'));
@@ -52,10 +67,12 @@ mongoose.connect(process.env.MONGODB_CONNECTION, {
 const generalController = require("./controllers/general");
 const mealController = require("./controllers/meal");
 const formController = require("./controllers/forms");
+const dashboardsController = require("./controllers/dashboards");
 
 app.use("/", generalController);
 app.use("/", mealController);
 app.use("/", formController);
+app.use("/", dashboardsController);
 
 // *** THE FOLLOWING CODE SHOULD APPEAR IN YOUR ASSIGNMENT AS IS (WITHOUT MODIFICATION) ***
 
