@@ -8,5 +8,5 @@ Course/Section: WEB322 ZAA<br>
 </p>
 
 <h2>## Project URLs</h2>
-<p>GitHub Repository: https://github.com/VictorLozanoAlonso/WEB322-Assignment-03<br>
-Heroku URL: https://web322-assignment-03.herokuapp.com/</p>
+<p>GitHub Repository: https://github.com/VictorLozanoAlonso/WEB322-Project<br>
+Heroku URL: https://web322--project.herokuapp.com/</p>
