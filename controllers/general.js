@@ -24,7 +24,6 @@ router.get("/", function(req, res) {
 router.get("/welcome", function(req, res) {
     res.render("general/welcome", {
         topMeals: mealsModel.getTopMeals(),
-        fullName: userInfo.fullName(),
         title: "Welcome Page",
         clerk: req.session.loginType === "Clerk"
     });

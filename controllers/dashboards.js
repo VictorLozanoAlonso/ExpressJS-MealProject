@@ -34,7 +34,7 @@ router.get ('/clerk', clerkDb, (req, res) => {
 router.get ('/customer', customerDb, (req, res) => {
   res.render ('dashboards/customer', {
     title: "Customer Dashboard",
-    //topMeals: mealsModel.getTopMeals(),
+    topMeals: mealsModel.getTopMeals(),
     clerk: req.session.loginType === "Clerk"     
   });
 });

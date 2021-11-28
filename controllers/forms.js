@@ -80,11 +80,9 @@
             
             sgMail.send(msg)
             .then(() => {
+                req.session.user = user;
+                req.session.loginType = "Customer";
                 res.redirect("welcome");
-                var fullName = "";
-                module.exports.fullName = function() {
-                    return fullName = fName + " " + lName;
-                };
             })
             .catch(err => {
                 console.log(`Error ${err}`);
