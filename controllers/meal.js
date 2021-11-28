@@ -14,7 +14,9 @@ const router = express.Router();
 
 router.get("/on-the-menu", function(req, res) {
     res.render("meal/onthemenu", {
-        meals: mealsModel.getMealsByCat()
+        meals: mealsModel.getMealsByCat(),
+        title: "On the Menu",
+        clerk: req.session.loginType === "Clerk"
     });
 });
 

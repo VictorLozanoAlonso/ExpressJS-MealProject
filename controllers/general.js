@@ -17,14 +17,16 @@ const router = express.Router();
 router.get("/", function(req, res) {
     res.render("general/home", {
         topMeals: mealsModel.getTopMeals(),
-        title: "Home"
+        title: "Home",
+        clerk: req.session.loginType === "Clerk"
     });
 });
 router.get("/welcome", function(req, res) {
     res.render("general/welcome", {
         topMeals: mealsModel.getTopMeals(),
         fullName: userInfo.fullName(),
-        title: "Welcome Page"
+        title: "Welcome Page",
+        clerk: req.session.loginType === "Clerk"
     });
 });
 module.exports = router;

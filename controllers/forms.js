@@ -118,7 +118,8 @@
 });
  router.get("/login", function(req, res) {
      res.render("forms/login", {
-         title: "Login"
+         title: "Login",
+         clerk: req.session.loginType === "Clerk"
      });
  });
  router.post("/login", function(req, res) {

@@ -28,14 +28,14 @@ function customerDb (req, res, next) {
 router.get ('/clerk', clerkDb, (req, res) => {
   res.render ('dashboards/clerk', {
     title: "Clerk Dashboard",
-    clerk: true    
+    clerk: req.session.loginType === "Clerk"  
   });
 });
 router.get ('/customer', customerDb, (req, res) => {
   res.render ('dashboards/customer', {
     title: "Customer Dashboard",
     topMeals: mealsModel.getTopMeals(),
-    clerk: false      
+    clerk: req.session.loginType === "Clerk"     
   });
 });
 
