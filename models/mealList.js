@@ -7,7 +7,9 @@
  * Student ID: 130720204
  * Course/Section: WEB322 ZAA
  ************************************************************************************/
- 
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+
 let mealsList = [
     {
         mealName: "California Steak",
@@ -107,6 +109,45 @@ let mealsList = [
     }
 ];
 
+// Define the meal schema
+const mealSchema = new Schema({
+    "mealName": {
+        type: String,
+        required: true
+    },
+    "ingredients": {
+        type: String,
+        required: true
+    },
+    "description": String,
+    "category": {
+        type: String,
+        required: true
+    },
+    "price": {
+        type: Number,
+        required: true
+    },
+    "cookTime": String,
+    "servings": Number,
+    "calories": Number,
+    "imgUrl": {
+        type: String,
+        unique: true,
+        required: true
+    },
+    "topMeal": {
+        type: Boolean,
+        required: true
+    }
+});
+
+const mealModel = mongoose.model("meals", mealSchema);
+module.exports = mealModel;
+module.exports.fakeMeals = function(){
+    return mealsList;
+}
+
 module.exports.getMealsByCat = function () {
     var mealsByCat = [{
         category: mealsList[0].category,
@@ -143,3 +184,4 @@ module.exports.getTopMeals = function () {
   }
   return filtered;
 };
+

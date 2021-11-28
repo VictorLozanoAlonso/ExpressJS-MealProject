@@ -68,11 +68,13 @@ const generalController = require("./controllers/general");
 const mealController = require("./controllers/meal");
 const formController = require("./controllers/forms");
 const dashboardsController = require("./controllers/dashboards");
+const loaddataController = require("./controllers/load-data");
 
 app.use("/", generalController);
 app.use("/", mealController);
 app.use("/", formController);
 app.use("/", dashboardsController);
+app.use("/load-data", loaddataController);
 
 // *** THE FOLLOWING CODE SHOULD APPEAR IN YOUR ASSIGNMENT AS IS (WITHOUT MODIFICATION) ***
 
