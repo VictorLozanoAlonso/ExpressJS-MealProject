@@ -13,10 +13,32 @@ const express = require('express');
 const router = express.Router();
 
 router.get("/on-the-menu", function(req, res) {
-    res.render("meal/onthemenu", {
-        meals: mealsModel.getMealsByCat(),
-        title: "On the Menu",
-        clerk: req.session.loginType === "Clerk"
+    mealsModel.find({})
+    .exec()
+    .then((data) => {
+            data = data.map(value => value.toObject());
+            var mealsByCat =[];
+            for(let i = 0; i < data.length; i++){
+                let recorded = false;
+                for(let j = 0; j < mealsByCat.length && !recorded; j++){
+                    if(data[i].category === mealsByCat[j].category){
+                        mealsByCat[j].meal.push(data[i]);
+                        recorded = true;
+                    }
+                }
+                if(!recorded){
+                    mealsByCat.push({
+                        category: data[i].category,
+                        meal: [
+                            data[i]
+                        ]}
+                    );
+                }
+            }
+        res.render("meal/onthemenu", {
+            mealsByCat,
+            title: "On the Menu"
+        });
     });
 });
 

@@ -9,14 +9,20 @@
  * Course/Section: WEB322 ZAA
  ************************************************************************************/
  --->
-{{>hero}}
-{{#each mealsByCat}}
-<section class="meals-kit">
-    <h2>{{category}}</h2>
-    <div class="container py-3">
-        <div class="row row-cols-1 row-cols-md-2">
-            {{>mealKits this}}
+ {{#each data}}
+<div class="update-meals">
+<form action="update-meals" method="post">
+    <input type="hidden" name="id" value="{{_id}}" />
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col-sm">
+                <p><strong>{{mealName}}</strong></p>
+            </div>
+            <div class="col-sm">
+                <button class="btn btn-primary mb-4" type="submit">Update</button>
+            </div>
         </div>
     </div>
-</section>
+</form>
+</div>
 {{/each}}

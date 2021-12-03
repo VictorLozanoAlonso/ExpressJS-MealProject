@@ -27,16 +27,21 @@ function customerDb (req, res, next) {
 }
 router.get ('/clerk', clerkDb, (req, res) => {
   res.render ('dashboards/clerk', {
-    title: "Clerk Dashboard",
-    clerk: req.session.loginType === "Clerk"  
+    title: "Clerk Dashboard" 
   });
 });
 router.get ('/customer', customerDb, (req, res) => {
-  res.render ('dashboards/customer', {
-    title: "Customer Dashboard",
-    topMeals: mealsModel.getTopMeals(),
-    clerk: req.session.loginType === "Clerk"     
-  });
+    mealsModel.find({
+      topMeal: true
+  })
+  .exec()
+  .then((topMeals) => {
+      topMeals = topMeals.map(value => value.toObject());
+      res.render ('dashboards/customer', {
+        title: "Customer Dashboard",
+        topMeals: mealsModel.getTopMeals()     
+      });
+    });
 });
 
 module.exports = router;

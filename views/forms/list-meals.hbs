@@ -9,14 +9,17 @@
  * Course/Section: WEB322 ZAA
  ************************************************************************************/
  --->
-{{>hero}}
-{{#each mealsByCat}}
-<section class="meals-kit">
-    <h2>{{category}}</h2>
-    <div class="container py-3">
-        <div class="row row-cols-1 row-cols-md-2">
-            {{>mealKits this}}
+ <div class="card-deck mt-2">
+    <h2>List of meals</h2>
+{{#each data}}
+        <div class="card list-meals mt-3 ms-3 me-3 mb-3">
+            <div class="card-body">
+                <h3 class="card-title">{{mealName}}</h5>
+                <p class="card-text">{{ingredients}}</p>
+                <p class="card-text">{{description}}</p>
+                <p class="card-text">Price: {{price}}</p>
+                <p class="card-text">Category: <strong>{{category}}</strong></p>
+            </div>
         </div>
-    </div>
-</section>
 {{/each}}
+</div>

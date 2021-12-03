@@ -10,6 +10,7 @@
 const express = require ('express');
 const exphbs = require ('express-handlebars');
 const session = require ('express-session');
+const fileUpload = require("express-fileupload");
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const mongoose = require ("mongoose");
@@ -42,6 +43,7 @@ app.use((req, res, next) => {
   // res.locals.user is a global handlebars variable.
   // This means that every single handlebars file can access this variable.
   res.locals.user = req.session.user;
+  res.locals.clerk = req.session.isClerk;
   next();
 });
 
@@ -50,6 +52,9 @@ app.use (express.static (__dirname + '/public'));
 
 // Set up body parser
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// Set up express-fileupload
+app.use(fileUpload());
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_CONNECTION, {

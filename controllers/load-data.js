@@ -29,8 +29,7 @@ router.get("/meal-kits", (req, res) => {
                     else {
                         res.render ('load-data/meal-kits', {
                             title: "Data loaded",
-                            message: "Added meal kits to the database",
-                            clerk: req.session.loginType === "Clerk"     
+                            message: "Added meal kits to the database"     
                         });
                     }
                 });
@@ -38,16 +37,14 @@ router.get("/meal-kits", (req, res) => {
             else {
                 res.render ('load-data/meal-kits', {
                     title: "Data loaded",
-                    message: "Meal kits have already been added to the database",
-                    clerk: req.session.loginType === "Clerk" 
+                    message: "Meal kits have already been added to the database" 
                 });
             }
         });
     }else{
         res.render ('load-data/meal-kits', {
             title: "Restricted Access",
-            message: "You are not authorized to add meal kits" ,
-            clerk: req.session.loginType === "Clerk"
+            message: "You are not authorized to add meal kits"
         });
     }
 });

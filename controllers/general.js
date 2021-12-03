@@ -9,23 +9,41 @@
  ************************************************************************************/
 
 const mealsModel = require("../models/mealList.js");
-const userInfo = require("../controllers/forms.js");
 const express = require('express');
+const nameWelcome = require("./forms.js");
 const router = express.Router();
 
 //Routes
 router.get("/", function(req, res) {
-    res.render("general/home", {
-        topMeals: mealsModel.getTopMeals(),
-        title: "Home",
-        clerk: req.session.loginType === "Clerk"
-    });
+    mealsModel.find({
+        topMeal: true
+    })
+    .exec()
+    .then((topMeals) => {
+        topMeals = topMeals.map(value => value.toObject());
+            res.render("general/home", {
+                topMeals,
+                title: "Home"
+            });
+        });
 });
 router.get("/welcome", function(req, res) {
-    res.render("general/welcome", {
-        topMeals: mealsModel.getTopMeals(),
-        title: "Welcome Page",
-        clerk: req.session.loginType === "Clerk"
+    mealsModel.find({
+        topMeal: true
+    })
+    .exec()
+    .then((topMeals) => {
+        topMeals = topMeals.map(value => value.toObject());
+            res.render("general/welcome", {
+                topMeals,
+                title: "Welcome Page"
+            });
     });
+});
+
+router.get("/logout", (req, res) => {
+    // Clear the session from memory.
+    req.session.destroy();
+    res.redirect("/login");
 });
 module.exports = router;

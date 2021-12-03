@@ -9,14 +9,17 @@
  * Course/Section: WEB322 ZAA
  ************************************************************************************/
  --->
-{{>hero}}
-{{#each mealsByCat}}
-<section class="meals-kit">
-    <h2>{{category}}</h2>
-    <div class="container py-3">
-        <div class="row row-cols-1 row-cols-md-2">
-            {{>mealKits this}}
+<div class="add-meal">
+    {{#if message}}
+    <h2 class="mt-5">{{message}}</h2>
+    {{else}}
+    <h2 class="mt-5">Adding a New Meal Kit</h2>
+    {{/if}}
+    <div class="add-form">
+        <div class="container mt-4 px-5">
+            <div class="row justify-content-md-center">
+                {{>add-form}}
+            </div>
         </div>
     </div>
-</section>
-{{/each}}
+</div>

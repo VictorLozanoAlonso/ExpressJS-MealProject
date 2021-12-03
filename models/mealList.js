@@ -119,21 +119,32 @@ const mealSchema = new Schema({
         type: String,
         required: true
     },
-    "description": String,
+    "description": {
+        type: String,
+        required: true
+    },
     "category": {
         type: String,
         required: true
     },
     "price": {
+        type: String,
+        required: true
+    },
+    "cookTime": {
+        type: String,
+        required: true
+    },
+    "servings": {
         type: Number,
         required: true
     },
-    "cookTime": String,
-    "servings": Number,
-    "calories": Number,
+    "calories": {
+        type: Number,
+        required: true
+    },
     "imgUrl": {
         type: String,
-        unique: true,
         required: true
     },
     "topMeal": {
@@ -148,40 +159,13 @@ module.exports.fakeMeals = function(){
     return mealsList;
 }
 
-module.exports.getMealsByCat = function () {
-    var mealsByCat = [{
-        category: mealsList[0].category,
-        meal: [
-            mealsList[0]
-        ]
-    }];
-    for(let i = 1; i < mealsList.length; i++){
-         let recorded = false;
-         for(let j = 0; j < mealsByCat.length && !recorded; j++){
-             if(mealsList[i].category === mealsByCat[j].category){
-                mealsByCat[j].meal.push(mealsList[i]);
-                recorded = true;
-             }
-         }
-         if(!recorded){
-            mealsByCat.push({
-                category: mealsList[i].category,
-                meal: [
-                    mealsList[i]
-                ]}
-            );
-         }
-    }
-    return mealsByCat;
-}
-
 module.exports.getTopMeals = function () {
-  var filtered = [];
-  for (var i = 0; i < mealsList.length; i++) {
-    if (mealsList[i].topMeal) {
-      filtered.push (mealsList[i]);
-    }
-  }
-  return filtered;
+    mealModel.find({
+        topMeal: true
+    })
+    .exec()
+    .then((data) => {
+            data = data.map(value => value.toObject());
+    });
 };
 
