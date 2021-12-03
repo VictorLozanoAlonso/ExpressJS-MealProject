@@ -39,7 +39,7 @@ router.get ('/customer', customerDb, (req, res) => {
       topMeals = topMeals.map(value => value.toObject());
       res.render ('dashboards/customer', {
         title: "Customer Dashboard",
-        topMeals: mealsModel.getTopMeals()     
+        topMeals     
       });
     });
 });

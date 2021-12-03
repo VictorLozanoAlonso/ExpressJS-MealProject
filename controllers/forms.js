@@ -352,6 +352,11 @@ router.get ('/update-meals', isClerk, function (req, res) {
         });
     });
 
+    router.get ('/update-item', isClerk, function (req, res) {
+      res.render ('forms/update-item', {
+        title: 'Update item'
+      });
+    });
 router.post ('/update-item', isClerk, function (req, res) {
     mealsModel.updateOne({
         _id: req.body.id
