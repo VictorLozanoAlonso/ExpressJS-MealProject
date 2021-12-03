@@ -358,7 +358,45 @@ router.get ('/update-meals', isClerk, function (req, res) {
       });
     });
 router.post ('/update-item', isClerk, function (req, res) {
-    mealsModel.updateOne({
+  let urlImageToUpdate;
+  if (req.files) {
+    let extension = path.parse (req.files.mealImage.name).ext;
+    if (
+      extension === '.jpeg' ||
+      extension === '.jpg' ||
+      extension === '.png' ||
+      extension === '.bmp' ||
+      extension === '.gif'
+    ) {
+      // Create a unique name for the image, so it can be stored in the file system.
+      let uniqueName = `${req.body.title}-${req.body.id}${extension}`;
+      // Copy the image data to a file in the "public/profile-pictures" folder.
+      req.files.mealImage.mv (`public/images/${uniqueName}`)
+      .then (() => {
+        urlImageToUpdate = '/images/' + uniqueName;
+      })
+    } else {
+      console.log (`Wrong File extension. Try again ...`);
+      mealsModel.find ({
+        _id: req.body.id
+      }).exec ().then (data => {
+        data = data.map (value => value.toObject ());
+        res.render ('forms/update-item', {
+          title: 'Error updating meal',
+          message: 'Incorrect Image extension. Try again...',
+          data
+        });
+      });
+    }
+  } else {
+    mealsModel.find ({
+      _id: req.body.id
+    }).exec ().then (data => {
+      data = data.map (value => value.toObject ());
+      urlImageToUpdate = data[0].imgUrl;
+    });
+  }
+  mealsModel.updateOne({
         _id: req.body.id
     }, {
         $set: {
@@ -370,6 +408,7 @@ router.post ('/update-item', isClerk, function (req, res) {
             cookTime: req.body.cookTime,
             servings: req.body.servings,
             calories: req.body.calories,
+            imgUrl: urlImageToUpdate,
             topMeal: req.body.topMeal === 'true'
         }
     })
