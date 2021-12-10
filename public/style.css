@@ -123,9 +123,18 @@ h2{
     border: 1px solid #1e1e1e;
     padding: 5px 10px;
     margin-top: 15px;
+    background-color: var(--prussian-blue);
+    color: #fff;
 }
 .meals-kit{
     padding: 30px 0px;
+}
+.col a{
+    text-decoration: none;
+    color: var(--prussian-blue);
+}
+.col a:hover{
+    text-decoration: underline;
 }
 /*Sign Up */
 .signup-form, .login-form{
@@ -168,6 +177,10 @@ input, input :focus-visible{
     border: 1px solid var(--prussian-blue);
     width: 80%;
     margin: 0 auto;
+}
+.img-meal-detail{
+    object-fit: cover;
+    height: 500px;
 }
 /* Footer */
 footer{
@@ -264,5 +277,12 @@ footer{
     }
     .add-form, .update-form{
         width: 80%;
+    }
+    .img-meal-detail{
+        object-fit: cover;
+        height: auto;
+    }
+    .d-flex{
+        flex-direction: column;
     }
 }

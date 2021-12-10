@@ -1,0 +1,45 @@
+{{#each data}}
+<div class="card border-0">
+    <img src="{{imgUrl}}" class="img-meal-detail" alt="{{mealName}}">
+    <div class="container-fluid text-center border-bottom pt-3 pb-3 bg-warning bg-gradient">
+        <div class="row align-items-start">
+            <div class="col border-end border-dark">
+                <strong>Cooking Time</strong>
+            </div>
+            <div class="col border-end border-dark">
+                <strong>Servings</strong>
+            </div>
+            <div class="col">
+                <strong>Calories</strong>
+            </div>
+        </div>
+        <div class="row align-items-center">
+            <div class="col border-end border-dark">
+                {{cookTime}}
+            </div>
+            <div class="col border-end border-dark">
+                {{servings}}
+            </div>
+            <div class="col">
+                {{calories}}
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="d-flex align-items-center">
+            <div class="flex-grow-1 ms-3">
+                <h2 class="card-title text-center">{{mealName}}</h2>
+                <p class="card-text text-center">{{ingredients}}</p>
+            </div>
+            <div class="flex-shrink-0">
+                <div class="price fs-2">{{price}}</div>
+            </div>
+        </div>
+        <hr>
+        <p class="card-text text-center">{{description}}</p>
+        <div class="d-grid gap-2">
+            <button type="button" class="btn btn-danger fs-3">Add to Order <i class="fas fa-cart-plus"></i></button>
+        </div>
+    </div>
+</div>
+{{/each}}

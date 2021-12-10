@@ -42,4 +42,16 @@ router.get("/on-the-menu", function(req, res) {
     });
 });
 
+router.get ('/:id', function (req, res) {
+    const mealId = req.params.id;
+    mealsModel.find({_id: mealId})
+    .exec()
+    .then((data) => {
+        data = data.map(value => value.toObject());
+        res.render ('meal/meal-detail', {
+            data
+        });
+    });
+});
+
 module.exports = router;
