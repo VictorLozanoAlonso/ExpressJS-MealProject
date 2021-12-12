@@ -374,6 +374,36 @@ router.post ('/update-item', isClerk, function (req, res) {
       req.files.mealImage.mv (`public/images/${uniqueName}`)
       .then (() => {
         urlImageToUpdate = '/images/' + uniqueName;
+        mealsModel.updateOne({
+          _id: req.body.id
+      }, {
+          $set: {
+              mealName: req.body.title,
+              description: req.body.description,
+              ingredients: req.body.ingredients,
+              category: req.body.category,
+              price: req.body.price,
+              cookTime: req.body.cookTime,
+              servings: req.body.servings,
+              calories: req.body.calories,
+              imgUrl: urlImageToUpdate,
+              topMeal: req.body.topMeal === 'true'
+          }
+      })
+      .exec()
+      .then(() => {
+          mealsModel.find ({
+              _id: req.body.id
+              }).exec ().then (data => {
+                  data = data.map (value => value.toObject ());
+                  res.render ('forms/update-item', {
+                      title: 'Item Updated',
+                      data,
+                      checked: req.body.topMeal,
+                      message: "Meal " + req.body.title + " was updated"
+                  });
+              });
+          });
       })
     } else {
       console.log (`Wrong File extension. Try again ...`);
@@ -394,9 +424,7 @@ router.post ('/update-item', isClerk, function (req, res) {
     }).exec ().then (data => {
       data = data.map (value => value.toObject ());
       urlImageToUpdate = data[0].imgUrl;
-    });
-  }
-  mealsModel.updateOne({
+      mealsModel.updateOne({
         _id: req.body.id
     }, {
         $set: {
@@ -426,6 +454,7 @@ router.post ('/update-item', isClerk, function (req, res) {
                 });
             });
         });
-
+    });
+  }
 });
 module.exports = router;

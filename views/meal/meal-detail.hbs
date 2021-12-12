@@ -37,11 +37,11 @@
         </div>
         <hr>
         <p class="card-text text-center">{{data.description}}</p>
-        {{#if customer}}
+
         <div class="d-grid gap-2">
-            <button type="button" onclick="window.location.href='/mealkits/{{data._id}}/add'" class="btn btn-danger fs-3">Add to Order <i class="fas fa-cart-plus"></i></button>
+            <button type="button" onclick="window.location.href='/mealkits/{{data._id}}/add'" class="btn btn-danger fs-3" {{#unless customer}}disabled{{/unless}}>Add to Order <i class="fas fa-cart-plus"></i></button>
         </div>
-        {{/if}}
+
     </div>
 </div>
 {{/if}}

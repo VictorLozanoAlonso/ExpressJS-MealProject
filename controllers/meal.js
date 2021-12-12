@@ -51,6 +51,9 @@ router.get ('/mealkits/:id', function (req, res) {
             title: data.mealName,
             data
         });
+    })
+    .catch (err => {
+        res.redirect ('/on-the-menu');
     });
 });
 

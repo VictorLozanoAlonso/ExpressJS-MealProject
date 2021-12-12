@@ -124,7 +124,7 @@ router.get("/thanks", (req, res) => {
     if(req.session.loginType === 'Customer'){
         res.render("general/thanks", {
             title: "Thanks",
-            message: "Thanks for your purchased.<br> We are preparing it. Check out your email for more details."
+            message: "Thanks for your purchased. We are preparing everything for you. Check out your email for more details."
         });
     } else {
         res.redirect ('/');
