@@ -56,7 +56,7 @@ router.get ('/mealkits/:id', function (req, res) {
 
 router.get ('/mealkits/:id/add', function (req, res) {
     const mealId = req.params.id;
-    if (req.session.user) {
+    if (req.session.loginType === 'Customer') {
         var cart = req.session.cart = req.session.cart || {items:0, total:0.0, cartItems:[]};
         var found = false;
         cart.cartItems.forEach(cartMeal => {
@@ -100,7 +100,8 @@ router.get ('/mealkits/:id/add', function (req, res) {
 
 router.get ('/mealkits/:id/remove', function (req, res) {
     const mealId = req.params.id;
-        var cart = req.session.cart || [];
+    if(req.session.loginType === 'Customer'){
+        var cart = req.session.cart || {items:0, total:0.0, cartItems:[]};
         const index = cart.cartItems.findIndex(cartMeal => { return cartMeal.id == mealId });
         message = `Removed "${cart.cartItems[index].name}" from the cart`;
         cart.items -= cart.cartItems[index].qty;
@@ -114,6 +115,9 @@ router.get ('/mealkits/:id/remove', function (req, res) {
             title: "Cart",
             message
         });
+    } else{
+        res.redirect('/mealkits/' + mealId);
+    }
 });
 
 module.exports = router;
