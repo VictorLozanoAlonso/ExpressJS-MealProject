@@ -1,5 +1,6 @@
 <h2 class="mt-2 mb-4">Cart Summary</h2>
-<div class="container w-75">
+<div class="container">
+<div class="text-center mb-3"><strong>{{message}}</strong></div>
     <table class="table">
     <thead>
         <tr>
@@ -7,6 +8,7 @@
         <th scope="col">Items</th>
         <th scope="col">Item Price</th>
         <th scope="col">Subtotal</th>
+        <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -16,13 +18,16 @@
                     <td>{{qty}}</td>
                     <td>${{price}}</td>
                     <td>${{subtotal}}</td>
+                    <td>
+                        <button type="button" onclick="window.location.href='/mealkits/{{id}}/remove'" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                    </td>
                 </tr>
             {{/each}}
             <tr>
-                <td colspan="4"></td>
+                <td colspan="5"></td>
             </tr>
             <tr class="table-active fs-5">
-                <td colspan="3" class="w-75 text-end"><strong>Total</strong></td>
+                <td colspan="4" class="w-75 text-end"><strong>Total</strong></td>
                 <td><strong>${{cart.total}}</strong></td>
             </tr>
     </tbody>

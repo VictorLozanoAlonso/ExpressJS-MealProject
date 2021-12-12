@@ -65,7 +65,11 @@ router.get ('/mealkits/:id/add', function (req, res) {
                 cartMeal.qty++;
                 cartMeal.subtotal = cartMeal.qty * cartMeal.price;
                 cart.items++;
-                cart.total = cart.total + cartMeal.price;
+                cart.total = 0.0;
+                cart.cartItems.forEach(cartMeal => {
+                    cart.total += (cartMeal.qty * cartMeal.price);
+                });
+                cart.total = (cart.total).toFixed(2);
                 res.redirect('/mealkits/' + mealId);
             }
         });
@@ -77,17 +81,39 @@ router.get ('/mealkits/:id/add', function (req, res) {
                     qty: 1,
                     id: meal._id,
                     name: meal.mealName,
-                    subtotal: meal.price,
-                    price: meal.price
+                    subtotal: meal.price.toFixed(2),
+                    price: meal.price.toFixed(2)
                 });
                 cart.items++;
-                cart.total = cart.total + meal.price;
+                cart.total = 0.0;
+                cart.cartItems.forEach(cartMeal => {
+                    cart.total += (cartMeal.qty * cartMeal.price);
+                });
+                cart.total = (cart.total).toFixed(2);
                 res.redirect('/mealkits/' + mealId);
             });
         }
     } else {
         res.redirect('/mealkits/' + mealId);
     }
+});
+
+router.get ('/mealkits/:id/remove', function (req, res) {
+    const mealId = req.params.id;
+        var cart = req.session.cart || [];
+        const index = cart.cartItems.findIndex(cartMeal => { return cartMeal.id == mealId });
+        message = `Removed "${cart.cartItems[index].name}" from the cart`;
+        cart.items -= cart.cartItems[index].qty;
+        cart.cartItems.splice(index, 1);
+        cart.total = 0.0;
+        cart.cartItems.forEach(cartMeal => {
+            cart.total += (cartMeal.qty * cartMeal.price);
+        });
+        cart.total = cart.total.toFixed(2);
+        res.render("general/cart", {
+            title: "Cart",
+            message
+        });
 });
 
 module.exports = router;
