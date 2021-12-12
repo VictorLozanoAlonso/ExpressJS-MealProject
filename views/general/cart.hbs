@@ -1,0 +1,30 @@
+<h2 class="mt-2 mb-4">Cart Summary</h2>
+<div class="container w-75">
+    <table class="table">
+    <thead>
+        <tr>
+        <th scope="col">Mealkit</th>
+        <th scope="col">Items</th>
+        <th scope="col">Item Price</th>
+        <th scope="col">Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+            {{#each cart.cartItems}}
+                <tr>
+                    <td>{{name}}</td>
+                    <td>{{qty}}</td>
+                    <td>${{price}}</td>
+                    <td>${{subtotal}}</td>
+                </tr>
+            {{/each}}
+            <tr>
+                <td colspan="4"></td>
+            </tr>
+            <tr class="table-active fs-5">
+                <td colspan="3" class="w-75 text-end"><strong>Total</strong></td>
+                <td><strong>${{cart.total}}</strong></td>
+            </tr>
+    </tbody>
+    </table>
+</div>

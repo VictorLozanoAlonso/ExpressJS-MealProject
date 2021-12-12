@@ -63,6 +63,7 @@ router.get ('/mealkits/:id/add', function (req, res) {
             if (cartMeal.id === mealId) {
                 found = true;
                 cartMeal.qty++;
+                cartMeal.subtotal = cartMeal.qty * cartMeal.price;
                 cart.items++;
                 cart.total = cart.total + cartMeal.price;
                 res.redirect('/mealkits/' + mealId);
@@ -76,6 +77,7 @@ router.get ('/mealkits/:id/add', function (req, res) {
                     qty: 1,
                     id: meal._id,
                     name: meal.mealName,
+                    subtotal: meal.price,
                     price: meal.price
                 });
                 cart.items++;

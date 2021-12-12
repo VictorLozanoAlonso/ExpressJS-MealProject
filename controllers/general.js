@@ -46,4 +46,14 @@ router.get("/logout", (req, res) => {
     req.session.destroy();
     res.redirect("/login");
 });
+
+router.get("/cart", (req, res) => {
+    if(req.session && req.session.user){
+        res.render("general/cart", {
+            title: "Cart"
+        });
+    } else {
+        res.redirect("/");
+    }
+});
 module.exports = router;
