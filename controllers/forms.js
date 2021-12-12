@@ -241,7 +241,7 @@ router.post ('/add-meal', isClerk, function (req, res) {
     ingredients: req.body.ingredients,
     description: req.body.description,
     category: req.body.category,
-    price: '$' + parseFloat (req.body.price).toFixed (2),
+    price: parseFloat (req.body.price).toFixed(2),
     cookTime: req.body.cookTime,
     servings: req.body.servings,
     calories: req.body.calories,

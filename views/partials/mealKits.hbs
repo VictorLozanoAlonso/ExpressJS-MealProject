@@ -11,13 +11,13 @@
  --->
 {{#each meal}}
 <div class="col mb-3">
-        <a href="/{{_id}}">
+        <a href="/mealkits/{{_id}}">
                 <div class="card">
                         <img src="{{imgUrl}}" class="card-img-top" alt="{{mealName}}">
                         <div class="card-body">
                                 <h3 class="card-title">{{mealName}}</h3>
                                 <p class="card-text">{{ingredients}}</p>
-                                <div class="price">{{price}}</div>
+                                <div class="price">${{price}}</div>
                         </div>
                 </div>
         </a>

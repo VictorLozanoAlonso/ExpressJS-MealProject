@@ -25,18 +25,22 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="menu-items">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/on-the-menu">On the menu</a></li>
+                        <li><a href="/"><i class="fas fa-home"></i></a></li>
+                        <li><a href="/on-the-menu">Mealkits</a></li>
                     </ul>
                     {{#if user}}
                         <div class="user">
+                            Logged as: 
                             {{#if clerk}}
                             <a href="/clerk">
+                            Clerk
                             {{else}}
                             <a href="/customer">
+                            Customer
                             {{/if}}
-                            Logged as: {{user.fName}}</a>
+                            </a>
                         </div>
+                        {{#if cart}}<div class="cart"><i class="fas fa-shopping-cart"></i>({{cart.items}})</div>{{/if}}
                         <div class="logout"><a href="/logout">Logout <i class="fa-solid fa-power-off"></i></a></div>
                     {{else}}
                         <div class="sign-up"><a href="/sign-up">Sign-up</a></div>

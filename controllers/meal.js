@@ -42,16 +42,50 @@ router.get("/on-the-menu", function(req, res) {
     });
 });
 
-router.get ('/:id', function (req, res) {
+router.get ('/mealkits/:id', function (req, res) {
     const mealId = req.params.id;
-    mealsModel.find({_id: mealId})
+    mealsModel.findOne({_id: mealId}).lean()
     .exec()
     .then((data) => {
-        data = data.map(value => value.toObject());
         res.render ('meal/meal-detail', {
+            title: data.mealName,
             data
         });
     });
+});
+
+router.get ('/mealkits/:id/add', function (req, res) {
+    const mealId = req.params.id;
+    if (req.session.user) {
+        var cart = req.session.cart = req.session.cart || {items:0, total:0.0, cartItems:[]};
+        var found = false;
+        cart.cartItems.forEach(cartMeal => {
+            if (cartMeal.id === mealId) {
+                found = true;
+                cartMeal.qty++;
+                cart.items++;
+                cart.total = cart.total + cartMeal.price;
+                res.redirect('/mealkits/' + mealId);
+            }
+        });
+        if(!found){
+            mealsModel.findOne({_id: mealId}).lean()
+            .exec()
+            .then((meal) => {
+                cart.cartItems.push({
+                    qty: 1,
+                    id: meal._id,
+                    name: meal.mealName,
+                    price: meal.price
+                });
+                cart.items++;
+                cart.total = cart.total + meal.price;
+                res.redirect('/mealkits/' + mealId);
+            });
+        }
+    } else {
+        res.redirect('/mealkits/' + mealId);
+    }
 });
 
 module.exports = router;

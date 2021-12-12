@@ -44,6 +44,7 @@ app.use((req, res, next) => {
   // This means that every single handlebars file can access this variable.
   res.locals.user = req.session.user;
   res.locals.clerk = req.session.isClerk;
+  res.locals.cart = req.session.cart;
   next();
 });
 
