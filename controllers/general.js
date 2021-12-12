@@ -61,54 +61,59 @@ router.get("/checkout", (req, res) => {
     if(req.session.loginType === 'Customer'){
         var cart = req.session.cart;
         if(cart.items > 0){
-        const sgMail = require ('@sendgrid/mail');
-        sgMail.setApiKey (process.env.SEND_GRID_API_KEY);
-        var items = [];
-        cart.cartItems.forEach(cartMeal => {
-            items.push('<tr><td style="padding-right: 10px;">' + cartMeal.name + '</td><td style="padding-right: 5px;text-align: center;">' + cartMeal.qty + '</td><td style="padding-right: 5px;text-align: center;">$' + cartMeal.price + '</td><td style="padding-right: 5px;text-align: center;">$' + cartMeal.subtotal + '</td></tr>');
-        });
-        const msg = {
-          to: req.session.user.email,
-          from: 'vlozano-alonso@myseneca.ca',
-          subject: `Order Placed ${req.session.user.fName}!`,
-          html: `<h1>Hi ${req.session.user.fName}!</h1>
-                <h2>Your order was placed</h2>
-                <p>Mealkits summary:</p><br>
-                <table>
-                    <thead>
-                        <tr>
-                            <th style="padding-right: 10px;">Mealkit</th>
-                            <th style="padding-right: 5px;text-align:center;">Items</th>
-                            <th style="padding-right: 5px;text-align: center;">Item Price</th>
-                            <th style="padding-right: 5px;text-align: center;">Subtotal</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${items.join('')}
-                        <tr>
-                            <td colspan="4"></td>
-                        </tr>
-                        <tr>
-                            <td colspan="3" style="text-align: right;"><strong>Total</strong></td>
-                            <td><strong>$${cart.total}</strong></td>
-                        </tr>
-                    </tbody>
-                </table>
+            const sgMail = require ('@sendgrid/mail');
+            sgMail.setApiKey (process.env.SEND_GRID_API_KEY);
+            var items = [];
+            cart.cartItems.forEach(cartMeal => {
+                items.push('<tr><td style="padding-right: 10px;">' + cartMeal.name + '</td><td style="padding-right: 5px;text-align: center;">' + cartMeal.qty + '</td><td style="padding-right: 5px;text-align: center;">$' + cartMeal.price + '</td><td style="padding-right: 5px;text-align: center;">$' + cartMeal.subtotal + '</td></tr>');
+            });
+            const msg = {
+            to: req.session.user.email,
+            from: 'vlozano-alonso@myseneca.ca',
+            subject: `Order Placed ${req.session.user.fName}!`,
+            html: `<h1>Hi ${req.session.user.fName}!</h1>
+                    <h2>Your order was placed</h2>
+                    <p>Mealkits summary:</p><br>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="padding-right: 10px;">Mealkit</th>
+                                <th style="padding-right: 5px;text-align:center;">Items</th>
+                                <th style="padding-right: 5px;text-align: center;">Item Price</th>
+                                <th style="padding-right: 5px;text-align: center;">Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${items.join('')}
+                            <tr>
+                                <td colspan="4"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" style="text-align: right;"><strong>Total</strong></td>
+                                <td><strong>$${cart.total}</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-                <p>Thanks for your purchase. You will receive them soon. Enjoy!<br> 
-                </p>`,
-        };
+                    <p>Thanks for your purchase. You will receive them soon. Enjoy!<br> 
+                    </p>`,
+            };
 
-        sgMail
-          .send (msg)
-          .then (() => {
-            req.session.cart = {items:0, total:0.0, cartItems:[]};
-            res.redirect ('/thanks');
-          })
-          .catch (err => {
-            console.log (`Error ${err}`);
-            res.redirect ('/cart');
-          });
+            sgMail
+            .send (msg)
+            .then (() => {
+                req.session.cart = {items:0, total:0.0, cartItems:[]};
+                res.redirect ('/thanks');
+            })
+            .catch (err => {
+                console.log (`Error ${err}`);
+                res.redirect ('/cart');
+            });
+        } else {
+            res.render("general/cart", {
+                title: "Cart",
+                message: "The cart is empty. Add some mealkit"
+            });
         }
     } else{
         res.redirect ('/');
