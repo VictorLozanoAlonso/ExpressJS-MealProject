@@ -45,6 +45,7 @@ app.use((req, res, next) => {
   res.locals.user = req.session.user;
   res.locals.clerk = req.session.isClerk;
   res.locals.cart = req.session.cart;
+  res.locals.customer = req.session.loginType === 'Customer';
   next();
 });
 

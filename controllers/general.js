@@ -48,7 +48,7 @@ router.get("/logout", (req, res) => {
 });
 
 router.get("/cart", (req, res) => {
-    if(req.session && req.session.user){
+    if(req.session && req.session.loginType === 'Customer'){
         res.render("general/cart", {
             title: "Cart"
         });
