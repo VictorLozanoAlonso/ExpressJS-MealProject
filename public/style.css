@@ -303,4 +303,7 @@ footer{
         text-align: right;
         padding: 10px 0;
     }
+    .table tr td{
+        font-size: 0.8rem;
+    }
 }
