@@ -98,7 +98,7 @@ h2{
     font-style: italic;
     font-size: 0.8rem;
     text-decoration: none;
-    padding: 0 20px;
+    padding: 0 18px;
 }
 .user a{
     color: #ffffff;
@@ -111,7 +111,7 @@ h2{
     text-decoration: none;
     font-size: 0.8rem;
     align-items: center;
-    padding: 0 7px;
+    padding: 0 6px;
     color: #fff;
 }
 .cart a:hover{
